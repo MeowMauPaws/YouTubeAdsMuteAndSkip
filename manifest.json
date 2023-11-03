@@ -1,0 +1,12 @@
+{
+  "name": "YTMuteAndSkip",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Chrome Extension. Auto mute and skip.",
+  "content_scripts": [
+    {
+      "matches": ["//https://www.youtube.com/*"],
+      "js": ["alert.js"]
+    }
+  ]
+}
