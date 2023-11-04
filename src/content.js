@@ -23,11 +23,27 @@
         const $skipButton = document.getElementsByClassName("ytp-ad-skip-button-container")[0];
         if ($skipButton) $skipButton.click();
     };
+    const clickMuteButton = () => {
+        const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
+        if (muteButton) muteButton.click();
+    };
 
-    const onMute = () => {
-        const $muteButton = document.getElementsByClassName('ytp-volume-area')[0];
-        if ($muteButton) $muteButton.click();
-    }
+    const isMute = () => {
+        console.log('should mute?')
+        const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
+        if (muteButton) {
+            const titleText = muteButton.getAttribute('title');
+            const ariaLabel = muteButton.getAttribute('aria-label');
+            const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
+            if (labelText) {
+                return labelText.includes('解除');
+            } else {
+                console.error('Both title and aria-label attributes are not present');
+            }
+        } else {
+            console.error('muteButton element is not found');
+        }
+    };
 
     const obConfig = {
         childList: true,
@@ -38,28 +54,15 @@
             if (mutation.addedNodes.length && mutation.addedNodes[0].className === 'ytp-ad-player-overlay') {
                 clickSkipButton()
                 console.log('should mute?')
-                const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
-                if (muteButton) {
-                    const titleText = muteButton.getAttribute('title');
-                    const ariaLabel = muteButton.getAttribute('aria-label');
-                    const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
-                    if (labelText) {
-                        if (labelText.includes('解除')) {
-                            console.log('already muted!');
-                        } else {
-                            console.log('on mute!');
-                            muteButton.click();
-                        }
-                    } else {
-                        console.error('Both title and aria-label attributes are not present');
-                    }
-                } else {
-                    console.error('muteButton element is not found');
+                if (!isMute()) {
+                    clickMuteButton();
                 }
             };
             // 特定のノードが削除された場合の処理
             if (mutation.removedNodes.length && mutation.removedNodes[0].className === 'ytp-ad-player-overlay') {
-                console.log('ad disappeared!!!!!!!!!!!!!!');
+                if (isMute()) {
+                    clickMuteButton();
+                }
             }
         });
     });
@@ -75,7 +78,7 @@
         clickSkipButton();
     }, 1000);
     const secinitInterval = setInterval(() => {
-        console.log("on working... v1");
+        console.log("on working... v2");
         // const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
         // if (muteButton) {
         //     const titleText = muteButton.getAttribute('title');
