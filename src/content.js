@@ -34,7 +34,7 @@
         if (muteButton) {
             const titleText = muteButton.getAttribute('title');
             const ariaLabel = muteButton.getAttribute('aria-label');
-            const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
+            const labelText = titleText || ariaLabel;  // マウスホバーの状態によってtitleText/ariaLabelどちらが存在するか変わる。存在する方を使う
             if (labelText) {
                 return labelText.includes('解除');
             } else {
@@ -72,25 +72,8 @@
         if (document.getElementById(playerId) != null) {
             const obTarget = document.getElementById(playerId);
             observer.observe(obTarget, obConfig);
-            console.log("after observer")
             clearInterval(initInterval);
         }
         clickSkipButton();
     }, 1000);
-    const secinitInterval = setInterval(() => {
-        console.log("on working... v2");
-        // const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
-        // if (muteButton) {
-        //     const titleText = muteButton.getAttribute('title');
-        //     const ariaLabel = muteButton.getAttribute('aria-label');
-        //     const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
-        //     if (labelText) {
-        //         console.log(labelText.includes('解除'));
-        //     } else {
-        //         console.error('Both title and aria-label attributes are not present');
-        //     }
-        // } else {
-        //     console.error('muteButton element is not found');
-        // }
-    }, 2000);
 };
