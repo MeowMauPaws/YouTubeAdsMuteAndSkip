@@ -1,50 +1,93 @@
-// 以下のコードを content.js ファイルに保存します。
-let wasElementPresent = false;  // 変数を追加して、前回のチェック時に特定の要素が表示されていたかどうかを記録します。
+{
 
-function checkForSpecificElement(selector) {
-    return document.querySelector(selector) !== null;
-}
+    const hostName = location.hostname;
+    const subDomain = hostName.split('.')[0];
 
-function muteVideo() {
-    const muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-    if (muteButton) {
-        const isMuted = muteButton.getAttribute('aria-label') === 'ミュート（消音） キーボード ショートカット m';
-        if (!isMuted) {
-            muteButton.click();
+    const newStyle = document.createElement('style');
+    newStyle.innerText = '.ytp-ad-overlay-container{display:none!important;}';
+    document.getElementsByTagName('head').item(0).appendChild(newStyle);
+
+    const returnPlayerId = (v) => {
+        switch (v) {
+            case 'music':
+                return 'player';
+                break;
+            case 'www':
+            default:
+                return 'ytd-player';
+                break;
         }
-    }
-}
+    };
 
-function unmuteVideo() {
-    const muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-    if (muteButton) {
-        const isMuted = muteButton.getAttribute('aria-label') === 'ミュート（消音） キーボード ショートカット m';
-        if (isMuted) {
-            muteButton.click();
+    const clickSkipButton = () => {
+        const $skipButton = document.getElementsByClassName("ytp-ad-skip-button-container")[0];
+        if ($skipButton) $skipButton.click();
+    };
+
+    const onMute = () => {
+        const $muteButton = document.getElementsByClassName('ytp-volume-area')[0];
+        if ($muteButton) $muteButton.click();
+    }
+
+    const obConfig = {
+        childList: true,
+        subtree: true
+    };
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes.length && mutation.addedNodes[0].className === 'ytp-ad-player-overlay') {
+                clickSkipButton()
+                console.log('should mute?')
+                const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
+                if (muteButton) {
+                    const titleText = muteButton.getAttribute('title');
+                    const ariaLabel = muteButton.getAttribute('aria-label');
+                    const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
+                    if (labelText) {
+                        if (labelText.includes('解除')) {
+                            console.log('already muted!');
+                        } else {
+                            console.log('on mute!');
+                            muteButton.click();
+                        }
+                    } else {
+                        console.error('Both title and aria-label attributes are not present');
+                    }
+                } else {
+                    console.error('muteButton element is not found');
+                }
+            };
+            // 特定のノードが削除された場合の処理
+            if (mutation.removedNodes.length && mutation.removedNodes[0].className === 'ytp-ad-player-overlay') {
+                console.log('ad disappeared!!!!!!!!!!!!!!');
+            }
+        });
+    });
+
+    const playerId = returnPlayerId(subDomain);
+    const initInterval = setInterval(() => {
+        if (document.getElementById(playerId) != null) {
+            const obTarget = document.getElementById(playerId);
+            observer.observe(obTarget, obConfig);
+            console.log("after observer")
+            clearInterval(initInterval);
         }
-    }
-}
-
-function skipAdButton() {
-    const skipAdButton = document.querySelector(".ytp-ad-skip-button.ytp-button");
-    if (skipAdButton) {
-        skipAdButton.click();
-    }
-}
-
-const triggerSelector = ".ytp-ad-player-overlay";
-const adSkipTriggerSelector = ".ytp-ad-skip-button.ytp-button";
-
-setInterval(() => {
-    const isElementPresent = checkForSpecificElement(triggerSelector);  // 現在のチェック時に特定の要素が表示されているかどうかを確認します。
-    if (isElementPresent) {
-        muteVideo();
-    } else if (wasElementPresent) {  // 前回のチェック時に特定の要素が表示されていた場合、かつ現在表示されていない場合、ミュートを解除します。
-        unmuteVideo();
-    }
-    wasElementPresent = isElementPresent;  // 前回のチェックの状態を更新します。
-
-    if (checkForSpecificElement(adSkipTriggerSelector)) {
-        skipAdButton();
-    }
-}, 100);
+        clickSkipButton();
+    }, 1000);
+    const secinitInterval = setInterval(() => {
+        console.log("on working... v1");
+        // const muteButton = document.querySelector(".ytp-mute-button.ytp-button");
+        // if (muteButton) {
+        //     const titleText = muteButton.getAttribute('title');
+        //     const ariaLabel = muteButton.getAttribute('aria-label');
+        //     const labelText = titleText || ariaLabel;  // titleTextが存在する場合はそれを使用し、存在しない場合はariaLabelを使用します
+        //     if (labelText) {
+        //         console.log(labelText.includes('解除'));
+        //     } else {
+        //         console.error('Both title and aria-label attributes are not present');
+        //     }
+        // } else {
+        //     console.error('muteButton element is not found');
+        // }
+    }, 2000);
+};
