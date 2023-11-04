@@ -1,12 +1,37 @@
 {
-  "name": "YTMuteAndSkip",
-  "version": "1.0.0",
-  "manifest_version": 2,
-  "description": "Chrome Extension. Auto mute and skip.",
-  "content_scripts": [
-    {
-      "matches": ["//https://www.youtube.com/*"],
-      "js": ["alert.js"]
+    "manifest_version": 3,
+    "name": "YTMuteAndSkip",
+    "version": "1.0",
+    "description": "Automatically controls video player based on specified triggers.",
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "action": {
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        },
+        "default_title": "Toggle Video Controls"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/watch?v=*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
     }
-  ]
 }
