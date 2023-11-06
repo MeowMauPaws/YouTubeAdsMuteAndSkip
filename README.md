@@ -24,6 +24,15 @@ The process should be quite similar if you're using another browser like Edge.
    - If there are any errors, a warning icon or an 'Errors' button will appear during the loading process.
    - To apply any changes to the source code, remember to hit the reload icon or the 'Update' button to refresh the extension.
 
+### Acknowledgements
+
+I would like to express my gratitude to the following resources that have helped guide the development of this extension:
+
+- YouTubeの動画広告をスキップする拡張機能を作ってみた by a post on Qiita by [mt877](https://qiita.com/mt877/items/110ae331917bc8fd8018).
+- Google Chrome 拡張機能（Chrome extensions V3）の作り方 by a post on Qiita by [tomy0610(Chihiro Tomioka)](https://qiita.com/tomy0610/items/85d4e6abb1f1eefc519f#%E4%BD%9C%E3%81%A3%E3%81%9F%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%AB%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95).
+
+Their contributions have been invaluable in the creation of this extension.
+
 ---
 
 Enjoy an enhanced YouTube experience with YouTubeAdsSkipAndMute. Say hello to uninterrupted videos and goodbye to sudden loud ads!
