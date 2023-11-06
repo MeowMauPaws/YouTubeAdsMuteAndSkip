@@ -1,5 +1,7 @@
 # YouTubeAdsSkipAndMute - Chrome Extension
 
+### **Note**: This extension currently supports Japanese only and is not yet internationalized
+
 ## Say Goodbye to Sudden Loud Ads
 
 ### Overview
