@@ -33,7 +33,7 @@ const isMute = () => {
         const ariaLabel = muteButton.getAttribute('aria-label');
         const labelText = titleText || ariaLabel;  // マウスホバーの状態によってtitleText/ariaLabelどちらが存在するか変わる。存在する方を使う
         if (labelText) {
-            return labelText.includes('解除');
+            return labelText.includes('解除') || labelText.includes('Unmute');
         } else {
             console.error('Both title and aria-label attributes are not present');
         }

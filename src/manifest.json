@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "YTMuteAndSkip",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Automatically controls video player based on specified triggers.",
     "permissions": [
         "activeTab",
