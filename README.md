@@ -1,4 +1,4 @@
-# YouTubeAdsSkipAndMute - Chrome Extension
+# YouTubeAdsMuteAndSkip - Chrome Extension
 
 ### **Note**: This extension currently supports Japanese and English and Deutsch only and is not yet internationalized
 
@@ -6,7 +6,7 @@
 
 ### Overview
 
-Have you ever been jolted out of your seat by an ad blasting at full volume while you're deep into a YouTube binge? Fear no more! The YouTubeAdsSkipAndMute extension is here to rescue your eardrums and streamline your viewing experience. Our smart tech detects when an ad starts and instantly mutes the video player, then unmutes it as soon as the ad is over. And the cherry on top? It automatically skips those pesky skippable ads for you!
+Have you ever been jolted out of your seat by an ad blasting at full volume while you're deep into a YouTube binge? Fear no more! The YouTubeAdsMuteAndSkip extension is here to rescue your eardrums and streamline your viewing experience. Our smart tech detects when an ad starts and instantly mutes the video player, then unmutes it as soon as the ad is over. And the cherry on top? It automatically skips those pesky skippable ads for you!
 
 ### Features
 
@@ -37,4 +37,4 @@ Their contributions have been invaluable in the creation of this extension.
 
 ---
 
-Enjoy an enhanced YouTube experience with YouTubeAdsSkipAndMute. Say hello to uninterrupted videos and goodbye to sudden loud ads!
+Enjoy an enhanced YouTube experience with YouTubeAdsMuteAndSkip. Say hello to uninterrupted videos and goodbye to sudden loud ads!
